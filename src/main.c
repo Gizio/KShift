@@ -68,7 +68,7 @@ int main(int argc, char **argv) {
       rflag++;
       aflag++;
       vflag++;
-      printf("KShift Version: 0.2.0a (2020-7-2020)\n", Version());
+      printf("KShift Version: %s\n", Version());
       break;
     default:
       help();
