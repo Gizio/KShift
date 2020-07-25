@@ -5,9 +5,11 @@
 #include <time.h>
 #include "../include/cliargs.h"
 
-int main(int argc, char **argv) {
-  
-  if (argc < 2) {
+int main(int argc, char **argv)
+{
+
+  if (argc < 2)
+  {
     help();
   }
   int opt;
@@ -16,10 +18,24 @@ int main(int argc, char **argv) {
   int rflag = 0;
   int aflag = 0;
   int vflag = 0;
-  while ((opt = getopt(argc, argv, "ht:rav")) != -1) {
-    switch (opt) {
+
+  const char *const shortOpts = "ht:rav";
+  const struct option longOpts[] = {
+    {"help", no_argument, NULL, 'n'},
+    {"temp", required_argument, NULL, 't'},
+    {"reset", no_argument, NULL, 'r'},
+    {"auto", no_argument, NULL, 'a'},
+    {"version", no_argument, NULL, 'v'},
+    {NULL, no_argument, NULL, 0}
+  };
+  
+  while ((opt = getopt_long(argc, argv, shortOpts, longOpts, NULL)) != -1)
+  {
+    switch (opt)
+    {
     case 'h':
-      if (hflag) {
+      if (hflag)
+      {
         break;
       }
       hflag++;
@@ -30,7 +46,8 @@ int main(int argc, char **argv) {
       help();
       break;
     case 't':
-      if (tflag) {
+      if (tflag)
+      {
         break;
       }
       hflag++;
@@ -41,7 +58,8 @@ int main(int argc, char **argv) {
       setTemp(atoi(optarg));
       break;
     case 'r':
-      if (rflag) {
+      if (rflag)
+      {
         break;
       }
       hflag++;
@@ -52,7 +70,8 @@ int main(int argc, char **argv) {
       reset();
       break;
     case 'a':
-      if (aflag) {
+      if (aflag)
+      {
         break;
       }
       hflag++;

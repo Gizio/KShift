@@ -161,7 +161,7 @@ void autoDetect()
 char *Version()
 {
 	char *version = malloc(5 * sizeof(char));
-	version = "0.2.1a";
+	version = "0.3.1a";
 	return version;
 }
 #endif

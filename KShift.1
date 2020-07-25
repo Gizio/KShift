@@ -1,0 +1,97 @@
+.TH KShift 1 "25 July 2020" "Version: 0.2.1a"
+.SH NAME
+KShift - A lightweight program to change your colour temperature.  
+.SH SYNOPSIS
+KShift 
+.B [ -t 
+.I temperature 
+.B ] [ -a ] [ -r ] [ -h ] [-v ]
+.SH DESCRIPTION
+.I KShift 
+is a lightweight front-end for shifting the gamma settings in 
+.I xrandr
+and works as an alternative to other programs such as:
+.I f.lux
+and
+.I redshift
+.PP
+Using 
+.I KShift
+you can easily change the colour temperature of your screen, reducing the blue light shown. This will prevent eye strain, and, if working at night, allow for better sleep. 
+You can use 
+.I KShift
+to manually shift the temperature of your screen, or you can set it to automatically set the colour temperature based on the time of day, and, in the future, other factors.
+.SH OPTIONS
+.B [ -t 
+.I temperature
+.B ] 
+|
+.B [ --temp 
+.I temperature 
+.B ]
+		Manually set the colour tempreture by factors of 500K
+.PP
+
+.B [ -a ]
+|
+.B [ --auto ]
+						    Automatically set colour temperature based on system time.
+.PP
+.B [ -r ]
+|
+.B [ --reset]
+				              Reset the colour temperature to 6500K.
+.PP
+.B [ -h ]
+|
+.B [ --help ]
+				 	   	    Displays the help menu.
+.PP
+.B [ -v ]
+|
+.B [ --version ]
+						 Displays version number.
+.SH KNOWN BUGS
+.B CRITICAL BUGS
+.PP
+	None found.
+.PP
+.B HIGH PRIORITY
+.PP
+	None found.
+.PP
+.B MEDIUM PRIORITY
+.PP
+	None found.
+.PP
+.B LOW PRIORITY
+.PP
+	None found.
+.PP
+.B FIXED
+	- Accidental reccursion.
+.PP
+	- Unnecessary code.
+.PP
+	- Version number error.
+.PP
+.SH Roadmap
+	- Automatic update detection
+.PP
+	- Config pages
+.PP
+	- Improved automatic settings
+.PP
+	- More precise temperatures
+.PP
+	- Colour fade
+.PP
+	- Optimisations
+.PP
+.SH Dependencies
+	- Xorg
+.SH AUTHOR
+Created by Gizio. Licensed under the GNU General Public License v3.0
+
+
+						    

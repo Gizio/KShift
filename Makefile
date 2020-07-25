@@ -5,6 +5,8 @@ BIN		:= bin
 SRC		:= src
 INCLUDE	:= include
 LIB		:= lib
+MANUAL	:= KShift.1
+MANUALPATH	:= /usr/share/man/man1
 
 LIBRARIES	:=
 
@@ -39,3 +41,12 @@ run: all
 
 $(BIN)/$(EXECUTABLE): $(OBJECTS)
 	$(CC) $(CFLAGS) $(CINCLUDES) $(CLIBS) $^ -o $@ $(LIBRARIES)
+
+install:
+	cp $(BIN)/$(EXECUTABLE) /bin
+	cp $(MANUAL) $(MANUALPATH)
+uninstall:
+	rm /bin/$(EXECUTABLE)
+	rm $(MANUALPATH/$(MANUAL)
+	-$(RM) $(BIN)/$(EXECUTABLE)
+	-$(RM) $(OBJECTS)
