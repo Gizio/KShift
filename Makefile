@@ -4,9 +4,9 @@ CFLAGS	:= -Wall -Wextra -g
 BIN		:= bin
 SRC		:= src
 INCLUDE	:= include
-LIB		:= lib
 MANUAL	:= KShift.1
 MANUALPATH	:= /usr/share/man/man1
+INSTALLPATH := /usr/bin
 
 LIBRARIES	:=
 
@@ -35,7 +35,6 @@ clean:
 	-$(RM) $(BIN)/$(EXECUTABLE)
 	-$(RM) $(OBJECTS)
 
-
 run: all
 	./$(BIN)/$(EXECUTABLE)
 
@@ -43,10 +42,10 @@ $(BIN)/$(EXECUTABLE): $(OBJECTS)
 	$(CC) $(CFLAGS) $(CINCLUDES) $(CLIBS) $^ -o $@ $(LIBRARIES)
 
 install:
-	cp $(BIN)/$(EXECUTABLE) /bin
-	cp $(MANUAL) $(MANUALPATH)
+	-$(CP) $(BIN)/$(EXECUTABLE) $(INSTALLPATH)
+	-$(CP) $(MANUAL) $(MANUALPATH)
 uninstall:
-	rm /bin/$(EXECUTABLE)
-	rm $(MANUALPATH/$(MANUAL)
+	-$(RM) $(INSTALLPATH)/$(EXECUTABLE)
+	-$(RM) $(MANUALPATH/$(MANUAL)
 	-$(RM) $(BIN)/$(EXECUTABLE)
 	-$(RM) $(OBJECTS)

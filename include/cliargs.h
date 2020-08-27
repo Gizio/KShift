@@ -22,21 +22,21 @@ struct Gamma
 };
 
 void help();
-void setTemp(int temp);
-void reset();
-void autoDetect();
+void setTemp(int temp, char name[]);
+void reset(char name[]);
+void autoDetect(char name[]);
 char *Version();
 
 void help()
 {
-	printf("\nHelp:\n\nKShift -h | KShift --help\tDisplays help\nKShift -t | "
+	printf("\nHelp:\n\nKShift -h | KShift --help\tDisplays help\nKShift -n | KShift --name\tMonitor Name (REQUIRES ARGUMENT)\nKShift -t | "
 				 "KShift --temp\tShifts monitor temp (REQUIRES ARGUMENT)\nKShift -r | "
 				 "KShift --reset\tResets monitor temp\nKShift -a | KShift "
 				 "--auto\tAutomatically sets temperature\n\nType \"man KShift\" into "
 				 "terminal for more information\n\n");
 }
 
-void setTemp(int temp)
+void setTemp(int temp, char name[])
 {
 	struct Gamma gamma;
 	strcpy(gamma.K25K, "1.00000000:0.64373109:0.28819679\0");
@@ -48,7 +48,9 @@ void setTemp(int temp)
 	strcpy(gamma.K55K, "1.00000000:0.93853986:0.88130458\0");
 	strcpy(gamma.K6K, "1.00000000:0.97107439:0.94305985\0");
 
-	char xrandr[1024] = "xrandr --output eDP-1 --gamma ";
+	char xrandr[256] = "xrandr --output ";
+	strcat(xrandr, name);
+	strcat(xrandr, " --gamma ");
 
 	if (temp > 6500)
 	{
@@ -94,16 +96,21 @@ void setTemp(int temp)
 		strcat(xrandr, gamma.K6K);
 		break;
 	case 6500:
-		reset();
+		reset(name);
 	default:
 		return;
 	}
 	system(xrandr);
 }
 
-void reset() { system("xrandr --output eDP-1 --gamma 1:1:1"); }
+void reset(char name[]) 
+{
+	char xrandr[128] = "xrandr --output "; 
+	strcat(xrandr, name);
+	strcat(xrandr, " 1:1:1");
+}
 
-void autoDetect()
+void autoDetect(char name[])
 {
 
 	struct Gamma gamma;
@@ -122,7 +129,10 @@ void autoDetect()
 	int hour;
 	while (1)
 	{
-		char xrandr[1024] = "xrandr --output eDP-1 --gamma ";
+		char xrandr[1024] = "xrandr --output ";
+		strcat(xrandr, name);
+		strcat(xrandr, " --gamma ");
+
 		now = time(NULL);
 		now_tm = localtime(&now);
 		hour = now_tm->tm_hour;
@@ -161,7 +171,7 @@ void autoDetect()
 char *Version()
 {
 	char *version = malloc(5 * sizeof(char));
-	version = "0.3.1a";
+	version = "1.0.1";
 	return version;
 }
 #endif

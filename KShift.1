@@ -1,8 +1,11 @@
-.TH KShift 1 "25 July 2020" "Version: 0.2.1a"
+.TH KShift 1 "27th August 2020" "Version: 1.0.1"
 .SH NAME
 KShift - A lightweight program to change your colour temperature.  
 .SH SYNOPSIS
 KShift 
+.B [ -n
+.I monitor name
+.B ]
 .B [ -t 
 .I temperature 
 .B ] [ -a ] [ -r ] [ -h ] [-v ]
@@ -22,6 +25,16 @@ You can use
 .I KShift
 to manually shift the temperature of your screen, or you can set it to automatically set the colour temperature based on the time of day, and, in the future, other factors.
 .SH OPTIONS
+
+.B [ -n 
+.I monitor name
+.B ]
+|
+.B [ --name
+.I monitor name
+.B ]
+
+.PP
 .B [ -t 
 .I temperature
 .B ] 

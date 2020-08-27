@@ -18,10 +18,12 @@ int main(int argc, char **argv)
   int rflag = 0;
   int aflag = 0;
   int vflag = 0;
+  char name[64] = "";
 
-  const char *const shortOpts = "ht:rav";
+  const char *const shortOpts = "hnt:rav";
   const struct option longOpts[] = {
     {"help", no_argument, NULL, 'n'},
+	{"name", required_argument, NULL, 'n'},
     {"temp", required_argument, NULL, 't'},
     {"reset", no_argument, NULL, 'r'},
     {"auto", no_argument, NULL, 'a'},
@@ -35,9 +37,7 @@ int main(int argc, char **argv)
     {
     case 'h':
       if (hflag)
-      {
-        break;
-      }
+		break;
       hflag++;
       tflag++;
       rflag++;
@@ -45,6 +45,13 @@ int main(int argc, char **argv)
       vflag++;
       help();
       break;
+    case 'n':
+	  if(hflag)
+		break;
+	  strncpy(name, argv[2], 64);
+	  printf("%s", name);
+	  break;
+
     case 't':
       if (tflag)
       {
@@ -55,7 +62,7 @@ int main(int argc, char **argv)
       rflag++;
       aflag++;
       vflag++;
-      setTemp(atoi(optarg));
+      setTemp(atoi(optarg), name);
       break;
     case 'r':
       if (rflag)
@@ -67,7 +74,7 @@ int main(int argc, char **argv)
       rflag++;
       aflag++;
       vflag++;
-      reset();
+      reset(name);
       break;
     case 'a':
       if (aflag)
@@ -79,7 +86,7 @@ int main(int argc, char **argv)
       rflag++;
       aflag++;
       vflag++;
-      autoDetect();
+      autoDetect(name);
       break;
     case 'v':
       hflag++;
@@ -89,7 +96,7 @@ int main(int argc, char **argv)
       vflag++;
       printf("KShift Version: %s\n", Version());
       break;
-    default:
+	    default:
       help();
       break;
     }
