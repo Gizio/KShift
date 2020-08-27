@@ -20,3 +20,6 @@ system time.</p>
 <p> For a more in-depth tutorial on how to use KShift, please type <strong>man KShift</strong> in terminal
 <br>
 <p> KShift <strong> [ -t</strong> <em> temperature </em> <strong> ] </strong> | <strong> [ --temp </strong> <em> temperature </em><strong> ]</strong> <strong> [ -a ]</strong> | <strong> [ --auto ] [ -r ] </strong> | <strong> [ --reset ] [ -h ] </strong> | <strong> [ --help ] [ -v ] <strong> | [ --version ]
+  
+## Note
+<p> This is intended for my own personal use, and may not be suitable, or up to, public standards, use at your own discretion</p>
