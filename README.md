@@ -36,4 +36,4 @@
 ## How to use
 <p> For a more in-depth tutorial on how to use KShift, please type <strong>man KShift</strong> in terminal
 <br>
-<p> KShift <strong> [ -t</strong> <em> temperature </em> <strong> ] </strong> | <strong> [ --temp </strong> <em> temperature </em><strong> ]</strong> <strong> [ -a ]</strong> | <strong> [ --auto ] [ -r ] </strong> | <strong> [ --reset ] [ -h ] </strong> | <strong> [ --help ] [ -v ] <strong> | [ --version ]
+<p> KShift </strong> <strong> [ -a ]</strong> | <strong> [ --auto ] [ -h ] </strong> | <strong> [ --help ] [ -v ] <strong> | [ --version ]
