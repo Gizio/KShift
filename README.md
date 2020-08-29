@@ -23,7 +23,7 @@
 <p>To do this first cd into the KShift config directory</p>
 <p><strong>cd ~/.config/KShift/</strong></p>
 <p>Then edit the .conf file</p>
-<p>Type the name of your monitor on the first line (to find the name type <strong>xrandr</strong> in terminal</p>
+<p>Type the name of your monitor on the first line (to find the name type <strong>xrandr</strong> in terminal)</p>
 <p>Save the file</p>
 
 ## Uninstallation
