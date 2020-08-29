@@ -7,10 +7,9 @@
 
 int main(int argc, char **argv)
 {
-
-  if (argc < 2)
+  if(argc < 2)
   {
-    help();
+  		autoDetect();
   }
   int opt;
   int hflag = 0;
@@ -18,14 +17,10 @@ int main(int argc, char **argv)
   int rflag = 0;
   int aflag = 0;
   int vflag = 0;
-  char name[64] = "";
 
-  const char *const shortOpts = "hnt:rav";
+  const char *const shortOpts = "hav";
   const struct option longOpts[] = {
     {"help", no_argument, NULL, 'n'},
-	{"name", required_argument, NULL, 'n'},
-    {"temp", required_argument, NULL, 't'},
-    {"reset", no_argument, NULL, 'r'},
     {"auto", no_argument, NULL, 'a'},
     {"version", no_argument, NULL, 'v'},
     {NULL, no_argument, NULL, 0}
@@ -39,54 +34,20 @@ int main(int argc, char **argv)
       if (hflag)
 		break;
       hflag++;
-      tflag++;
       rflag++;
       aflag++;
       vflag++;
       help();
       break;
-    case 'n':
-	  if(hflag)
-		break;
-	  strncpy(name, argv[2], 64);
-	  printf("%s", name);
-	  break;
-
-    case 't':
-      if (tflag)
-      {
-        break;
-      }
-      hflag++;
-      tflag++;
-      rflag++;
-      aflag++;
-      vflag++;
-      setTemp(atoi(optarg), name);
-      break;
-    case 'r':
-      if (rflag)
-      {
-        break;
-      }
-      hflag++;
-      tflag++;
-      rflag++;
-      aflag++;
-      vflag++;
-      reset(name);
-      break;
     case 'a':
       if (aflag)
-      {
-        break;
-      }
+ 		break;
       hflag++;
       tflag++;
       rflag++;
       aflag++;
       vflag++;
-      autoDetect(name);
+      autoDetect();
       break;
     case 'v':
       hflag++;
@@ -96,9 +57,9 @@ int main(int argc, char **argv)
       vflag++;
       printf("KShift Version: %s\n", Version());
       break;
-	    default:
-      help();
-      break;
+	default:
+	  autoDetect();
+	  break;
     }
   }
 }

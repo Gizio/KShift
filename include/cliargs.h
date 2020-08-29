@@ -7,6 +7,7 @@
 #include <time.h>
 #include <string.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 struct Gamma
 {
@@ -22,9 +23,7 @@ struct Gamma
 };
 
 void help();
-void setTemp(int temp, char name[]);
-void reset(char name[]);
-void autoDetect(char name[]);
+void autoDetect();
 char *Version();
 
 void help()
@@ -36,83 +35,8 @@ void help()
 				 "terminal for more information\n\n");
 }
 
-void setTemp(int temp, char name[])
+void autoDetect()
 {
-	struct Gamma gamma;
-	strcpy(gamma.K25K, "1.00000000:0.64373109:0.28819679\0");
-	strcpy(gamma.K3K, "1.00000000:0.71976951:0.42860152\0");
-	strcpy(gamma.K35K, "1.00000000:0.77987699:0.54642268\0");
-	strcpy(gamma.K4K, "1.00000000:0.82854786:0.64816570\0");
-	strcpy(gamma.K45K, "1.00000000:0.86860704:0.73688797\0");
-	strcpy(gamma.K5K, "1.00000000:0.90198230:0.81465502\0");
-	strcpy(gamma.K55K, "1.00000000:0.93853986:0.88130458\0");
-	strcpy(gamma.K6K, "1.00000000:0.97107439:0.94305985\0");
-
-	char xrandr[256] = "xrandr --output ";
-	strcat(xrandr, name);
-	strcat(xrandr, " --gamma ");
-
-	if (temp > 6500)
-	{
-		printf("ERROR: You cannot go above 6500K\n");
-		return;
-	}
-	else if (temp < 2500)
-	{
-		printf("Values must be above 2000\n");
-	}
-	else if (temp % 500 != 0)
-	{
-		printf("ERROR: Value must be divisible by 500\n");
-		return;
-	}
-
-	// The following code is an affront to god.
-	switch (temp)
-	{
-	case 2500:
-		printf("%d", temp);
-		strcat(xrandr, gamma.K25K);
-		break;
-	case 3000:
-		strcat(xrandr, gamma.K3K);
-		break;
-	case 3500:
-		strcat(xrandr, gamma.K35K);
-		break;
-	case 4000:
-		strcat(xrandr, gamma.K4K);
-		break;
-	case 4500:
-		strcat(xrandr, gamma.K45K);
-		break;
-	case 5000:
-		strcat(xrandr, gamma.K5K);
-		break;
-	case 5500:
-		strcat(xrandr, gamma.K55K);
-		break;
-	case 6000:
-		strcat(xrandr, gamma.K6K);
-		break;
-	case 6500:
-		reset(name);
-	default:
-		return;
-	}
-	system(xrandr);
-}
-
-void reset(char name[]) 
-{
-	char xrandr[128] = "xrandr --output "; 
-	strcat(xrandr, name);
-	strcat(xrandr, " 1:1:1");
-}
-
-void autoDetect(char name[])
-{
-
 	struct Gamma gamma;
 	strcpy(gamma.K25K, "1.00000000:0.64373109:0.28819679\0");
 	strcpy(gamma.K3K, "1.00000000:0.71976951:0.42860152\0");
@@ -124,13 +48,35 @@ void autoDetect(char name[])
 	strcpy(gamma.K6K, "1.00000000:0.97107439:0.94305985\0");
 	strcpy(gamma.K65K, "1:1:1\0");
 
+	FILE * file;
+	char dir[64] = "";
+	strcat(dir, getenv("HOME"));
+	
+	strcat(dir, "/.config/KShift/KShift.conf");
+	file = fopen(dir, "r");
+
+	char display[64];
+
+	
+	while(fgets(display, 64, file) != NULL)
+	{
+	}
+
+	fclose(file);
+
+	
 	time_t now;
 	struct tm *now_tm;
 	int hour;
 	while (1)
 	{
 		char xrandr[1024] = "xrandr --output ";
-		strcat(xrandr, name);
+		strcat(xrandr, display);
+		if (xrandr == NULL)
+			return;
+		int length = strlen(xrandr);
+		if (xrandr[length-1] == '\n')
+			xrandr[length-1]  = '\0';
 		strcat(xrandr, " --gamma ");
 
 		now = time(NULL);
@@ -165,13 +111,15 @@ void autoDetect(char name[])
 			break;
 		}
 		system(xrandr);
+		printf("done");	
+		usleep(100000);
 	}
 }
 
 char *Version()
 {
 	char *version = malloc(5 * sizeof(char));
-	version = "1.0.1";
+	version = "1.0.0";
 	return version;
 }
 #endif
